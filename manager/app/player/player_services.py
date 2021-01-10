@@ -38,6 +38,22 @@ type_to_endpoint = {
 }
 
 
+@celery.on_after_configure.connect
+def setup_periodic_tasks(sender, **kwargs):
+    sender.add_periodic_task(
+        crontab(minute=0, hour=3),
+        start_update_periodic.s("matches"),
+    )
+    sender.add_periodic_task(
+        crontab(minute=10, hour=3),
+        start_update_periodic.s("players")
+    )
+    sender.add_periodic_task(
+        crontab(minute=0, hour=5),
+        start_update_periodic.s("teams"),
+    )
+
+
 def start_update_players(active_task_id):
     for team in slug_teams:
         update_players.delay(slug_team=team, tracker_id=active_task_id)
@@ -53,22 +69,6 @@ def start_update_teams(active_task_id):
 def start_update_matches(active_task_id):
     for team in slug_teams:
         update_match.delay(slug_team=team, tracker_id=active_task_id)
-
-
-@celery.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
-    sender.add_periodic_task(
-        crontab(minute=0, hour=3),
-        start_update_periodic.s("matches"),
-    )
-    sender.add_periodic_task(
-        crontab(minute=10, hour=3),
-        start_update_periodic.s("players")
-    )
-    sender.add_periodic_task(
-        crontab(minute=0, hour=4),
-        start_update_periodic.s("teams"),
-    )
 
 
 @celery.task
