@@ -4,14 +4,14 @@ To install the latest code from the **main branch**, assuming you have a [Python
 
     $ pip install https://github.com/rubengonzlez17/apiFlask
 
-To install a **development** version clone the repo, cd to the directory and::
+To install a **development** version clone the repo, cd to the directory and:
 
     $ pip install -e .
 Deployment
 ----------
 ***Step-by-step deployment***
 
-Once installed the flask server might be started with the command::
+Once installed the flask server might be started with the command:
 
     $ manager
     
