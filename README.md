@@ -15,7 +15,7 @@ Once installed the flask server might be started with the command::
 
     $ manager
     
-Or using [Gunicorn](https://github.com/benoitc/gunicorn) instead::
+Or using [Gunicorn](https://github.com/benoitc/gunicorn) instead:
 
     $ gunicorn --workers 4 --bind 0.0.0.0:8000 --timeout 600 manager.app:app
     
@@ -23,23 +23,23 @@ To start the Celery queue, cd into the directory and in windows you might need [
 
     $ celery -A manager.app.celery worker --pool=gevent
 
-To clear all queued tasks, cd into the directory and::
+To clear all queued tasks, cd into the directory and:
 
     $ celery -A manager.app.celery purge -f
     
 
 ***Scripts for deployment***
 
-Alternately you can start the server by running the following command, specifying the port::
+Alternately you can start the server by running the following command, specifying the port:
     
     $ ./startServer.sh <PORT>
     
 
-Or you can stop the server by running the following command, specifying the port::
+Or you can stop the server by running the following command, specifying the port:
 
     $ ./stopServer.sh <PORT>
 
-To finish, the loading data must be started by running the following command, specifying the port:: 
+To finish, the loading data must be started by running the following command, specifying the port: 
 
     $ ./run_tasks.sh <PORT>
 Monitoring
